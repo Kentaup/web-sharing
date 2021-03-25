@@ -36,4 +36,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    /**
+     * このユーザが所有する投稿。（ Pageモデルとの関係を定義）
+     */
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
+    
+    /**
+     * このユーザが書いたレビュー。（Reviewモデルとの関係を定義）
+     */
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+    
+    /**
+     * このユーザに関係するモデルの件数をロードする。
+     */
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount(['pages','reviews']);
+    }
 }
