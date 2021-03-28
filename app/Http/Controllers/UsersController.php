@@ -32,4 +32,22 @@ class UsersController extends Controller
             'pages' => $pages
         ]);
     }
+    
+    public function destroy($id)
+    {
+        // idの値で投稿を検索して取得
+        $user = \App\User::findOrFail($id);
+        $pages = $user->pages();
+        $reviews = $user->reviews();
+        
+
+        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
+        if (\Auth::id() === $user->id) {
+            $reviews->delete();
+            $pages->delete();
+            $user->delete();
+        }
+
+        return redirect('/');
+    }
 }

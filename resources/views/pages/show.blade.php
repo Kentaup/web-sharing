@@ -6,30 +6,6 @@
         <button type="button" class="btn btn-primary">戻る</button>
     </a>
 </div>
-<div class="row mb-3">
-    <div class="media card">
-            <div class="card-body">
-                <div class="col-12 media-body">
-                    <p class="mb-0"> タイトル：{!! nl2br(e($page->title)) !!} </p>
-                </div>
-                <div class="col-12 media-body">
-                    {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
-                    <img class="mr-2 rounded" src="{{ Gravatar::get($page->user->email, ['size' => 30]) }}" alt="">
-                    {{-- 投稿の所有者のユーザ詳細ページへのリンク --}}
-                    {!! link_to_route('users.show', $page->user->name, ['user' => $page->user->id]) !!}
-                    <span class="text-muted"> posted at {{ $page->created_at }} </span>
-                
-                    <p class="mb-0"> 投稿者コメント{!! nl2br(e($page->content)) !!} </p>
-                    {{-- 投稿削除ボタンのフォーム --}}
-                    @if (Auth::id() == $page->user_id)
-                        {!! Form::open(['route' => ['pages.destroy', $page->id], 'method' => 'delete']) !!}
-                        {!! Form::submit('投稿を削除する', ['class' => 'btn btn-danger btn-sm']) !!}
-                        {!! Form::close() !!}
-                    @endif
-                </div>
-            </div>
-    </div>
-</div>
 <div class="card mb-3">
   <div class="row no-gutters">
     <div class="col-md-4">
@@ -46,8 +22,9 @@
                 <p class="card-text"><small class="text-muted">posted at {{ $page->created_at }}</small></p>
             </div>
         <div class="col-6 media-body">
+            <p class="card-text">投稿者<p>
             {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
-            <img class="mr-2 rounded" src="{{ Gravatar::get($page->user->email, ['size' => 30]) }}" alt="">
+            <img class="mr-2 rounded" src="{{ Gravatar::get($page->user->email, ['size' => 40]) }}" alt="">
             {{-- 投稿の所有者のユーザ詳細ページへのリンク --}}
             {!! link_to_route('users.show', $page->user->name, ['user' => $page->user->id]) !!}
             

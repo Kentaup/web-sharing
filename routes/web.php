@@ -24,7 +24,7 @@ Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController', ['only' => ['index', 'show','destroy']]);
     Route::resource('pages', 'PagesController');
     Route::resource('reviews', 'ReviewsController');
     Route::get('mine', 'PagesController@mine')->name('pages.mine');

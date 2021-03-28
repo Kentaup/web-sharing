@@ -1,18 +1,19 @@
 <div class="my-3">
-   <table class="table">
-      <tbody>
-        <tr>
-            <!--全ての投稿-->
-            <td>{!! link_to_route('welcome', '全ての投稿', [], ['class' => 'nav-link']) !!}</td>
-        </tr>
-        <tr>
-            <!--自分の投稿-->
-            <td>{!! link_to_route('pages.mine', '自分の投稿', [], ['class' => 'nav-link']) !!}</td>
-        </tr>
-        <tr>
-            <!--レビューした投稿-->
-            {{-- <td>{!! link_to_route('pages.review', 'Users', [], ['class' => 'nav-link']) !!}</td> --}}
-        </tr>
-      </tbody>
-    </table>
+    <div class="card text-center bg-light mb-3">
+            <div class="card-body">
+                <ul class="nav flex-column nav-pills">
+                    <li class="nav-item">
+                        <a href="{{ route('welcome') }}" class="nav-link {{ Request::routeIs('welcome') ? 'active' : '' }}">
+                        全ての投稿
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('pages.mine') }}" class="nav-link {{ Request::routeIs('pages.mine') ? 'active' : '' }}">
+                        自分の投稿
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    
 </div>

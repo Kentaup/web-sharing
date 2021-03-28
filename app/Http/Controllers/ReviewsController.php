@@ -10,6 +10,7 @@ class ReviewsController extends Controller
     {
         // バリデーション
         $request->validate([
+            'stars' => 'required',
             'comment' => 'required|max:255',
         ]);
 

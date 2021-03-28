@@ -115,9 +115,11 @@ class PagesController extends Controller
     {
         // idの値で投稿を検索して取得
         $page = \App\Page::findOrFail($id);
+        $reviews = $page->reviews();
 
         // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
         if (\Auth::id() === $page->user_id) {
+            $reviews->delete();
             $page->delete();
         }
 

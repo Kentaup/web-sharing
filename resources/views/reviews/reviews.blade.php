@@ -4,9 +4,15 @@
 @foreach ($reviews as $review)
     <!--{!! $star_sum += $review->stars !!}-->
 @endforeach
-<!--{!! $star_ave = $star_sum/count($reviews) !!}-->
+<!--{!! $star_ave = 1+$star_sum/count($reviews) !!}-->
+<div class="col-5">
+    <div class="card mb-2  text-warning bg-light">
+      <div class="card-body">
+        <h3 class="mb-1">　<i class="far fa-star"></i>　平均評価：{!! nl2br(e($star_ave)) !!} </h3>
+      </div>
+    </div> 
+</div>
 
-<p class="mb-0">　<i class="far fa-star"></i>　平均評価：{!! nl2br(e($star_ave)) !!} </p>
 <ul class="list-unstyled">
         @foreach ($reviews as $review)
             <div class="media mb-3 card">
@@ -19,7 +25,7 @@
                             <span class="text-muted"> posted at {{ $review->created_at }} </span>
                             <p class="mb-0">
                                 <i class="far fa-star"></i>
-                                {!! nl2br(e($review->stars)) !!} 
+                                {!! nl2br(e($review->stars+1)) !!} 
                             </p>
                             <p class="mb-0">{!! nl2br(e($review->comment)) !!} </p>
                         </div>
