@@ -112,12 +112,11 @@ class PagesController extends Controller
        
         // タイトル取得
         $html = mb_convert_encoding(file_get_contents($page->url), "utf-8", "auto");
-        preg_match('@<title>(.*)</title>@', $html, $result);
-        $title = $result[1];
-        if(isset($title)){
-            $page->title = $title;
+        preg_match('@<title>(.*)</title>@', $html, $title);
+        if(isset($title[1])){
+            $page->title = $title[1];
         }else{
-            $page->title = null;
+            $page->title = $page->url;
         }
         
         
