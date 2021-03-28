@@ -28,4 +28,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('pages', 'PagesController');
     Route::resource('reviews', 'ReviewsController');
     Route::get('mine', 'PagesController@mine')->name('pages.mine');
+    Route::get('search', 'PagesController@search')->name('pages.search');
 });

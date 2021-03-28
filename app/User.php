@@ -60,4 +60,6 @@ class User extends Authenticatable
     {
         $this->loadCount(['pages','reviews']);
     }
+    
+    
 }

@@ -15,7 +15,7 @@ class PagesController extends Controller
         if (\Auth::check()) {
             // 全て投稿の一覧を作成日時の降順で取得
             $pages = \App\Page::orderBy('created_at', 'desc')->paginate(10);
-
+            
             $data = [
                 'pages' => $pages
             ];
@@ -42,6 +42,32 @@ class PagesController extends Controller
 
         // Welcomeビューでそれらを表示
         return view('welcome', $data);
+    }
+    
+    public function search(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        
+        $query = Page::query();
+        
+        if (isset($keyword)) {
+            $query->where('title', 'like', '%' . self::escapeLike($keyword) . '%');
+        }
+        
+        $pages = $query->orderBy('created_at', 'desc')->paginate(10);
+        
+        $data = [
+                'pages' => $pages,
+                'keyword' => $keyword,
+            ];
+    
+        return view('welcome', $data);
+    }
+    
+    //「\\」「%」「_」などの記号を文字としてエスケープさせる
+    public static function escapeLike($str)
+    {
+        return str_replace(['\\', '%', '_'], ['\\\\', '\%', '\_'], $str);
     }
     
     public function show($id)
@@ -88,7 +114,12 @@ class PagesController extends Controller
         $html = mb_convert_encoding(file_get_contents($page->url), "utf-8", "auto");
         preg_match('@<title>(.*)</title>@', $html, $result);
         $title = $result[1];
-        $page->title = $title;
+        if($title->length > 0){
+            $page->title = $title;
+        }else{
+            $page->title = null;
+        }
+        
         
         //サムネイル取得
         //DOMDocumentとDOMXpathの作成

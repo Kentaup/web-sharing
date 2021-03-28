@@ -12,6 +12,10 @@
                         自分の投稿
                         </a>
                     </li>
+                    <li class="nav-item mt-3">
+                        @include('pages.search')
+                    </li>
+                    
                 </ul>
             </div>
         </div>
