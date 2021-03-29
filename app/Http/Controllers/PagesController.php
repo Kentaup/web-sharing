@@ -12,12 +12,13 @@ class PagesController extends Controller
     public function index()
     {
         $data = [];
+        $star_aves = [];
         if (\Auth::check()) {
             // 全て投稿の一覧を作成日時の降順で取得
             $pages = \App\Page::orderBy('created_at', 'desc')->paginate(10);
             
             $data = [
-                'pages' => $pages
+                'pages' => $pages,
             ];
         }
 

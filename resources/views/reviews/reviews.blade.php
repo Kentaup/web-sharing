@@ -23,7 +23,7 @@
                             {{-- ユーザ詳細ページへのリンク --}}
                             {!! link_to_route('users.show', $review->user->name, ['user' => $review->user->id]) !!}
                             <span class="text-muted"> posted at {{ $review->created_at }} </span>
-                            <p class="mb-0">
+                            <p class="mb-0 text-warning">
                                 <i class="far fa-star"></i>
                                 {!! nl2br(e($review->stars+1)) !!} 
                             </p>

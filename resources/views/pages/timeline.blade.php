@@ -5,7 +5,13 @@
             <div class="row no-gutters">
                 <div class="col-md-4">
                     <a href="{{ route('pages.show',['page'=>$page->id]) }}">
-                        <img class="bd-placeholder-img" width="100%" src="{!! $page->thumbnail !!}" >
+                        @if($page->thumbnail != null)
+                            <img class="bd-placeholder-img" width="100%" src="{!! $page->thumbnail !!}" >
+                        @else
+                            <p class="text-center mt-3"><i class="fas fa-image fa-5x" width="100%"></i></p>
+                            
+                        @endif
+                        
                     </a>
                 </div>
                 <div class="col-md-8">
@@ -21,7 +27,6 @@
                             <img class="mr-2 rounded" src="{{ Gravatar::get($page->user->email, ['size' => 40]) }}" alt="">
                             {{-- 投稿の所有者のユーザ詳細ページへのリンク --}}
                             {!! link_to_route('users.show', $page->user->name, ['user' => $page->user->id]) !!}
-                            
                         </div>
                     </div>
                 </div>
